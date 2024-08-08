@@ -13,7 +13,8 @@ import TableKehadiran from "@/components/home/table-kehadiran";
 const Page = async () => {
   const session = await getServerSession(authOptions);
   const absensiData = await getAbsensi();
-  if (!absensiData || absensiData.status !== 200) return <InternalServerError />;
+  if (!absensiData || absensiData.status !== 200)
+    return <InternalServerError />;
   const { dosenHadir, dosenPulang, dosenTidakHadir } = absensiData.data;
 
   return (
@@ -46,8 +47,16 @@ const Page = async () => {
           Universitas Muhammadiyah Sumatera Utara
         </p>
         <div className="grid grid-cols-1 gap-6 py-12 lg:grid-cols-3">
-          <TableKehadiran title="Dosen Hadir" absensiData={dosenHadir} message="Belum ada dosen yang hadir hari ini"/>
-          <TableKehadiran title="Dosen Pulang" absensiData={dosenPulang} message="Belum ada dosen yang pulang hari ini"/>
+          <TableKehadiran
+            title="Dosen Hadir"
+            absensiData={dosenHadir}
+            message="Belum ada dosen yang hadir hari ini"
+          />
+          <TableKehadiran
+            title="Dosen Pulang"
+            absensiData={dosenPulang}
+            message="Belum ada dosen yang pulang hari ini"
+          />
           <TableKehadiran
             title="Dosen Tidak Hadir"
             absensiData={dosenTidakHadir}
