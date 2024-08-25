@@ -13,6 +13,7 @@ import TableKehadiran from "@/components/home/table-kehadiran";
 const Page = async () => {
   const session = await getServerSession(authOptions);
   const absensiData = await getAbsensi();
+  console.log({ absensiData });
   if (!absensiData || absensiData.status !== 200)
     return <InternalServerError />;
   const { dosenHadir, dosenPulang, dosenTidakHadir } = absensiData.data;

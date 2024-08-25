@@ -45,13 +45,11 @@ const LoginForm = ({ callBackUrl }: { callBackUrl: string }) => {
         redirect: false,
         callBackUrl,
       });
-      console.log({ res });
       if (res?.error) {
         setIsInvalid(res.error);
         setIsLoading(false);
         return;
       }
-
       router.push(callBackUrl);
       router.refresh();
       return;

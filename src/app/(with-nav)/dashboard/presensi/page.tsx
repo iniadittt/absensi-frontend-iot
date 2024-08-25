@@ -14,6 +14,7 @@ import { authOptions } from "@/lib/authOptions";
 import Search from "@/components/ui/search";
 import TableSkeleton from "@/components/skeleton/table-skeleton";
 import InternalServerError from "@/app/500";
+import Download from "@/components/presensi/download";
 
 export const metadata: Metadata = {
   title: "Presensi",
@@ -28,18 +29,22 @@ const Page = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const search = searchParams?.search || "";
-  const presensiData = await getPresensi({
-    accessToken: session!.user.accessToken,
-    search,
-  }) || [];
+  const accessToken = session!.user.accessToken;
+  const presensiData =
+    (await getPresensi({
+      accessToken,
+      search,
+    })) || [];
   if (!presensiData) return <InternalServerError />;
-  const presensi = presensiData.status === 200 ? presensiData.data.presensi : []
+  const presensi =
+    presensiData.status === 200 ? presensiData.data.presensi : [];
 
   return (
     <main className="grid flex-1 items-start gap-6 sm:py-0">
       <div className="flex flex-row justify-between gap-6">
         <Search placeholder="Cari presensi berdasarkan nama dosen..." />
       </div>
+      <Download accessToken={accessToken}/>
       <Card>
         <CardHeader>
           <CardTitle>Presensi</CardTitle>

@@ -15,7 +15,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { signOut } from "next-auth/react";
 import LinksItem from "@/components/ui/links";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 const Navbar = () => {
   const pathname = usePathname();
